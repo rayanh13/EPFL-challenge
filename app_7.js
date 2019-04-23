@@ -72,6 +72,10 @@ var line2 = d3.line()
     .x(function(d) { return x(d[0]); })
     .y(function(d) { return y(s);   });
 
+
+
+
+
       //console.log(ar);
       //console.log(s);
 
@@ -146,6 +150,7 @@ d3.select(this).raise().classed('active', true);
 function dragged(d) {
 d[0] = x.invert(d3.event.x);
 d[1] = y.invert(d3.event.y);
+
 d3.select(this)
     .attr('cx', x(d[0]))
     .attr('cy', y(d[1]))
@@ -162,20 +167,45 @@ d3.selectAll("circle").each(function(d) {
     score1 = (arr_test[i] * 0.13);
     t += score1;
 };
-console.log(t);
+console.log(Math.round(t * 100) / 100);
 //return t;
-    return  coordinates = [
-        [5, t],
-        [10, t],
-        [20, t],
-        [50, t],
-        [100, t],
-        [120, t],
-        [130, t],
-        [150, t]
+    //var coordinates = [
+      //  [5, t],
+      //  [10, t],
+      //  [20, t],
+      //  [50, t],
+      //  [100, t],
+      //  [120, t],
+      //  [130, t],
+      //  [150, t]
+      //];
+
+
+      ////////////////////////////////////////////////////////////
+      var dataArray = [
+        { x: 5, y: Math.round(t * 100) / 100 },
+        { x: 10, y: Math.round(t * 100) / 100 },
+        { x: 20, y: Math.round(t * 100) / 100 },
+        { x: 50, y: Math.round(t * 100) / 100 },
+        { x: 100, y: Math.round(t * 100) / 100 },
+        { x: 120, y: Math.round(t * 100) / 100 },
+        { x: 130, y: Math.round(t * 100) / 100 },
+        { x: 150, y: Math.round(t * 100) / 100 }
+
       ];
 
+      console.log(dataArray);
+    
+
+     
+//////////////////////////////////////////////////////////////////////////////
+      
+
+
+
+
 }
+
 
 
 
@@ -186,5 +216,6 @@ d3.select(this).classed('active', false);
 }
 
 });
+
 
 

@@ -72,10 +72,6 @@ var line2 = d3.line()
     .x(function(d) { return x(d[0]); })
     .y(function(d) { return y(s);   });
 
-
-
-
-
       //console.log(ar);
       //console.log(s);
 
@@ -110,6 +106,7 @@ focus.append("path")
 
 focus.append("path")
 .datum(dataPoints)
+.attr("id","p2")
 .attr("fill", "none")
 .attr("stroke", "red")
 .attr("stroke-linejoin", "round")
@@ -133,7 +130,6 @@ focus.selectAll('circle')
 focus.selectAll('circle')
     .call(drag);
     
-
 focus.append('g')
 .attr('class', 'axis axis--x')
 .attr('transform', 'translate(0,' + chartHeight + ')')
@@ -156,66 +152,62 @@ d3.select(this)
     .attr('cy', y(d[1]))
 focus.select('path').attr('d', line);
 
-var arr_test = []
-var new1 = []; 
-d3.selectAll("circle").each(function(d) {
-  arr_test.push(d[1]);
-  });
 
-  t = 0;
-  for(var i=0; i<arr_test.length; i++) {
-    score1 = (arr_test[i] * 0.13);
-    t += score1;
-};
-console.log(Math.round(t * 100) / 100);
-//return t;
-    //var coordinates = [
-      //  [5, t],
-      //  [10, t],
-      //  [20, t],
-      //  [50, t],
-      //  [100, t],
-      //  [120, t],
-      //  [130, t],
-      //  [150, t]
-      //];
-
-
-      ////////////////////////////////////////////////////////////
-      var dataArray = [
-        { x: 5, y: Math.round(t * 100) / 100 },
-        { x: 10, y: Math.round(t * 100) / 100 },
-        { x: 20, y: Math.round(t * 100) / 100 },
-        { x: 50, y: Math.round(t * 100) / 100 },
-        { x: 100, y: Math.round(t * 100) / 100 },
-        { x: 120, y: Math.round(t * 100) / 100 },
-        { x: 130, y: Math.round(t * 100) / 100 },
-        { x: 150, y: Math.round(t * 100) / 100 }
-
-      ];
-
-      console.log(dataArray);
-    
-
-     
-//////////////////////////////////////////////////////////////////////////////
       
-
-
-
-
 }
-
-
-
-
 
 
 function dragended(d) {
+
+    d[0] = x.invert(d3.event.x);
+    d[1] = y.invert(d3.event.y);
+    
+    //x = x.invert(d[0]);
+    //y = y.invert(d[1]);
+    //console.log(x);
+    //console.log(y);
+    //d3.select(x).dataPoints;
+    console.log(dataPoints)
+    //return dataPoints;
+    
+    var ar1 = [];
+    var total1 = 0;
+    for (var i = 0; i < dataPoints.length; i++) {
+    score1 = (dataPoints[i][1] * dataPoints[i][2])
+    ar1.push(score1);
+    //console.log(score1);
+}
+    //console.log(ar1);
+    var s1 = 0;
+    for(var i=0; i<ar1.length; i++) {
+    s1 += ar1[i];
+}
+console.log(s1);
+
+//console.log(line2);
+//d3.select("path").style("stroke", "red").remove();
+
+// Line generator for constant data
+var line2 = d3.line()
+    .x(function(d) { return x(d[0]); })
+    .y(function(d) { return y(s1);   });
+
+    //d3.selectAll("path").attr('d', line2);
+    //focus.select('path').attr('d', line2);
+    //focus.select("path").attr("stroke-width", 1.5).attr("d", line2);
+    focus.select("#p2").attr("d",line2);
+
+
+
 d3.select(this).classed('active', false);
 }
 
+
+
 });
+
+
+
 
 
 
